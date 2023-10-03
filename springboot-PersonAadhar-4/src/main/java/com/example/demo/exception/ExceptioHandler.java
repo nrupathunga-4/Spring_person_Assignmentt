@@ -21,5 +21,10 @@ public class ExceptioHandler {
 			errormap.put(error.getField(),error.getDefaultMessage());
 		});
 		return errormap;
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex,WebRequest request) 
+	{
+		return new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	}	
 }
